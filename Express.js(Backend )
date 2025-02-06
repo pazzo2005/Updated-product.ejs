@@ -1,0 +1,22 @@
+app.get("/api/fetch_data/:id", async (req, res) => {
+    const productId = req.params.id;
+
+    // Fetch the scraped data (replace with actual logic)
+    const scrapedData = await getScrapedData(productId);
+
+    if (scrapedData) {
+        res.json({ success: true, product: scrapedData });
+    } else {
+        res.json({ success: false });
+    }
+});
+
+// Dummy function (Replace with actual function that fetches data)
+async function getScrapedData(id) {
+    return {
+        id: id,
+        name: "Sample Product",
+        price: "100 USD",
+        source: "Web Scraping Source"
+    };
+}
