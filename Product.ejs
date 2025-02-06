@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-DYGe1ZJXg2GNS0YowUVfh7JMFU2vFg1dJvLnH5AMMzpIpt+U48HgTH5rOMiqnDT/6Y4A0AEv2d+FZW6D3FUKk5w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2874f0;
+            margin-bottom: 20px;
+        }
+
+        .actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            background-color: #2874f0;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        table {
+            width: 100%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background: #fff;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #dddddd;
+        }
+
+        th {
+            background-color: #2874f0;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #eaeaea;
+        }
+
+        a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .headerContainer {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>All Products</h1>
+
+    <div class="headerContainer">
+        <div class="actions">
+            <button class="button" onclick="window.history.back()">
+                Back
+            </button>
+        </div>
+        <div class="actions">
+            <button class="button" onclick="openFilter()">Filter</button>
+            <button class="button">
+                <a href="create_product">
+                    Add Product
+                </a>
+            </button>
+        </div>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>User ID</th>
+                <th>Category ID</th>
+                <th>Location</th>
+                <th>Latitude & Longitude</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% products.forEach(product=> { %>
+                <tr>
+                    <td>
+                        <%= product.id %>
+                    </td>
+                    <td>
+                        <%= product.name %>
+                    </td>
+                    <td>
+                        <%= product.price %>
+                    </td>
+                    <td>
+                        <%= product.userId %>
+                    </td>
+                    <td>
+                        <%= product.categoryId %>
+                    </td>
+                    <td>
+                        <%= product.location ? product.location : 'Not available' %>
+                    </td>
+                    <td>
+                        <%= product.latLong ? `Lat: ${product.latLong.lat}, Long: ${product.latLong.long}` : 'Not available' %>
+                    </td>
+                    <td>
+                        <button class="button">
+                            <a href="product/update/<%=product.id %>">Edit</a>
+                        </button>
+                        <button class="button">
+                            <a href="view_product/<%=product.id %>">View</a>
+                        </button>
+                        <button class="button">
+                            <a href="product/delete/<%=product.id %>">Delete</a>
+                        </button>
+                        <button class="button fetch-data" data-id="<%= product.id %>">Fetch Data</button>
+                    </td>
+                </tr>
+                <% }); %>
+        </tbody>
+    </table>
+</body>
+
+</html>
